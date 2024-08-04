@@ -14,46 +14,27 @@ import os
 import dj_database_url
 from pathlib import Path
 
-DEBUG = os.environ.get('DEBUG', 'False') == 'True'
-ALLOWED_HOSTS = ['*']
-
-if os.path.exists('env.py'):
-    import env
-
-CLOUDINARY_URL = os.environ.get('CLOUDINARY_URL')
-
-if CLOUDINARY_URL:
-    from cloudinary import config
-    config(cloudinary_url=CLOUDINARY_URL)
-
-CLOUDINARY_STORAGE = {
-    'CLOUDINARY_URL': CLOUDINARY_URL
-}
-
-MEDIA_URL = '/media/'
-DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
-
-# Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+# Import environment variables from env.py if it exists
+if os.path.exists(os.path.join(BASE_DIR, 'env.py')):
+    import env
+
+# Load the secret key from the environment variable
+SECRET_KEY = os.environ.get('SECRET_KEY')
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-^hrq951)g8#t2$v2zsw7hjr#^5%^f5ee9^q8!0*7(dd8*it!&+'
-
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = os.environ.get('DEBUG', 'False') == 'True'
 
 ALLOWED_HOSTS = [
     '8000-davidb3rgqv-healthhubbe-nfa3axqfd0o.ws.codeinstitute-ide.net',
     'localhost',
     '127.0.0.1',
+    'herokuapp.com',
 ]
-
-STATIC_URL = '/static/'
-STATIC_ROOT = BASE_DIR / 'staticfiles'
 
 # Application definition
 
@@ -88,7 +69,6 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-
 ROOT_URLCONF = 'HealthHub_BE.urls'
 
 TEMPLATES = [
@@ -114,12 +94,8 @@ WSGI_APPLICATION = 'HealthHub_BE.wsgi.application'
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
+    'default': dj_database_url.config(default=os.environ.get('DATABASE_URL'))
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
@@ -157,12 +133,21 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
+STATIC_URL = '/static/'
+STATIC_ROOT = BASE_DIR / 'staticfiles'
+
+# Configure WhiteNoise middleware
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
-# Database configuration
-DATABASES = {
-    'default': dj_database_url.config(default=os.environ.get('DATABASE_URL'))
+# Cloudinary settings
+CLOUDINARY_URL = os.environ.get('CLOUDINARY_URL')
+
+CLOUDINARY_STORAGE = {
+    'CLOUDINARY_URL': CLOUDINARY_URL
 }
+
+MEDIA_URL = '/media/'
+DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field

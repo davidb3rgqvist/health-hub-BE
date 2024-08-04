@@ -12,3 +12,4 @@ svgwrite==1.4.3
 Tree==0.2.4
 dj_database_url
 whitenoise
+psycopg2-binary
