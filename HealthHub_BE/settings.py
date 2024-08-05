@@ -30,10 +30,9 @@ SECRET_KEY = os.environ.get('SECRET_KEY')
 DEBUG = os.environ.get('DEBUG', 'False') == 'True'
 
 ALLOWED_HOSTS = [
-    '8000-davidb3rgqv-healthhubbe-nfa3axqfd0o.ws.codeinstitute-ide.net',
+    'healthhub-be-462e201f4989.herokuapp.com',
     'localhost',
     '127.0.0.1',
-    'herokuapp.com',
 ]
 
 # Application definition
