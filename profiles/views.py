@@ -9,6 +9,12 @@ from django.http import Http404
 from .serializers import ProfileSerializer
 from .models import Profile
 from HealthHub_BE.permissions import IsOwnerOrReadOnly
+from django.http import HttpResponse
+from django.shortcuts import render
+
+def home(request):
+    return HttpResponse("Welcome to the Home Page!")
+
 
 class ProfileList(APIView):
     """
