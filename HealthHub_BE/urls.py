@@ -21,6 +21,11 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/', include('workouts.urls')),
     path('api-auth/', include('rest_framework.urls')),
+    path('api/auth/registration/', include('dj_rest_auth.registration.urls')),
+    path('dj-rest-auth/', include('dj_rest_auth.urls')),
+    path(
+        'dj-rest-auth/registration/', include('dj_rest_auth.registration.urls')
+    ),
     path('api-token-auth/', obtain_auth_token, name='api_token_auth'),
     path('', include('profiles.urls')),
 ]
