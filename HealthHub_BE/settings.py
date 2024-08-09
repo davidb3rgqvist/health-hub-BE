@@ -82,6 +82,7 @@ AUTHENTICATION_BACKENDS = [
 ]
 
 SITE_ID = 1
+
 MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
@@ -95,10 +96,20 @@ MIDDLEWARE = [
     'allauth.account.middleware.AccountMiddleware',
 ]
 
+CORS_ALLOW_ALL_ORIGINS = os.environ.get('CORS_ALLOW_ALL_ORIGINS', 'False') == 'True'
+
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",
     "https://3000-davidb3rgqvist-project5-c890dyzonnb.ws.codeinstitute-ide.net",
+    "https://health-hub-a58a68d5575e.herokuapp.com",
 ]
+
+CSRF_TRUSTED_ORIGINS = [
+    "http://localhost:3000",
+    "https://3000-davidb3rgqvist-project5-c890dyzonnb.ws.codeinstitute-ide.net",
+    "https://your-frontend-domain.herokuapp.com",
+]
+
 
 ROOT_URLCONF = 'HealthHub_BE.urls'
 
