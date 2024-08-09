@@ -106,6 +106,7 @@ CORS_ALLOWED_ORIGINS = [
 ]
 
 CSRF_TRUSTED_ORIGINS = [
+    "http://127.0.0.1:3000",
     "http://localhost:3000",
     "https://3000-davidb3rgqvist-project5-c890dyzonnb.ws.codeinstitute-ide.net",
     "https://your-frontend-domain.herokuapp.com",
