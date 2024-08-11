@@ -19,8 +19,7 @@ class ProfileList(generics.ListAPIView):
         'workoutprogram_count',
     ]
 
-
-class ProfileDetail(generics.RetrieveUpdateAPIView):
+class ProfileDetail(generics.RetrieveUpdateDestroyAPIView):
     permission_classes = [IsOwnerOrReadOnly]
     queryset = Profile.objects.annotate(
         workoutprogram_count=Count('owner__workoutprogram', distinct=True),
